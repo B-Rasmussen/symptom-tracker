@@ -23,15 +23,7 @@ export default function TabsLayout() {
                     tabBarLabel: "Record",
                     tabBarAccessibilityLabel: "Record",
                     headerShown: false,
-                    // tabBarIcon: ({ color }) => <FontAwesome name="pencil" color={color} size={24}/>,
-                    // tabBarIcon: ({ color }) => <FontAwesome name="pencil-square-o" color={color} size={24}/>,
-                    tabBarIcon: ({ color }) => (
-                        <FontAwesome
-                            name="pencil-square"
-                            color={color}
-                            size={24}
-                        />
-                    ),
+                    tabBarIcon: ({ color }) => <FontAwesome name="pencil" color={color} size={24}/>,
                     tabBarActiveTintColor: "blue",
                     tabBarInactiveTintColor: "purple",
                 }}
