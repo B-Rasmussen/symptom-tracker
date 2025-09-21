@@ -3,7 +3,7 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 
 export default function TabsLayout() {
     return (
-        <Tabs>
+        <Tabs backBehavior="history">
             <Tabs.Screen
                 name="index"
                 options={{

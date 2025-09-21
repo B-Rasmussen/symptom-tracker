@@ -1,40 +1,10 @@
 import { StyleSheet, Text, TextInput, View, Button, Alert } from "react-native";
 import React, { useState, useEffect } from "react";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { Link } from "expo-router";
 
 export default function RecordSymptoms() {
-    const [temperatureInput, setTemperatureInput] = useState("");
-    const [currentTime, setCurrentTime] = useState(new Date());
     const insets = useSafeAreaInsets();
-
-    useEffect(() => {
-        const intervalId = setInterval(() => {
-            setCurrentTime(new Date());
-        }, 1000);
-
-        return () => clearInterval(intervalId);
-    }, []);
-
-    const recordTemperature = async () => {
-        const now = new Date();
-        const date = currentTime.toLocaleDateString([], {
-            // weekday: "short",
-            month: "short",
-            day: "numeric",
-            year: "numeric"
-        });
-        const time = currentTime.toLocaleTimeString([], {
-            hour: "2-digit",
-            minute: "2-digit",
-        });
-        try {
-            Alert.alert(
-                `value saved as: ${temperatureInput} date: ${date} time: ${time}`
-            );
-        } catch (error) {
-            console.error("error: ", error);
-        }
-    };
 
     return (
         <View
@@ -49,15 +19,8 @@ export default function RecordSymptoms() {
             }}
         >
             <Text>record symptioms Screen</Text>
-            <TextInput
-                
-                keyboardType="numeric"
-                placeholder="temp"
-                inputMode="numeric"
-                value={temperatureInput}
-                onChangeText={setTemperatureInput}
-            />
-            <Button title="submit record" onPress={recordTemperature} />
+            <Link href={"/recordSymptoms/record-weight"}>record weight</Link>
+            <Link href={"/recordSymptoms/record-temperature"}>record temp</Link>
         </View>
     );
 }
