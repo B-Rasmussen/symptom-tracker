@@ -1,9 +1,11 @@
-import { StyleSheet, Text, View } from "react-native";
-import React from "react";
+import { StyleSheet, Text, TextInput, View, Button, Alert } from "react-native";
+import React, { useState, useEffect } from "react";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { Link } from "expo-router";
 
-export default function Home() {
+export default function RecordSymptoms() {
     const insets = useSafeAreaInsets();
+
     return (
         <View
             style={{
@@ -16,7 +18,11 @@ export default function Home() {
                 paddingRight: insets.right,
             }}
         >
-            <Text>Home Screen</Text>
+            <Text>record symptioms Screen</Text>
+            <Link href={"/recordSymptoms/record-weight"}>Log Weight</Link>
+            <Link href={"/recordSymptoms/record-temperature"}>
+                Log Temperature
+            </Link>
         </View>
     );
 }

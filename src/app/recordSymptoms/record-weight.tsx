@@ -1,6 +1,6 @@
 import { View } from "react-native";
 import React from "react";
-import { InputWeightTemp } from "@/components/InputWeightTemp";
+import { InputWeightTemp } from "@/src/components/InputWeightTemp";
 
 export default function RecordWeight() {
     return (
@@ -11,7 +11,7 @@ export default function RecordWeight() {
                 alignItems: "center",
             }}
         >
-            <InputWeightTemp inputType="Weight"/>
+            <InputWeightTemp inputType="Weight" />
         </View>
     );
 }

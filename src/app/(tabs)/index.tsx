@@ -1,11 +1,10 @@
-import { StyleSheet, Text, TextInput, View, Button, Alert } from "react-native";
-import React, { useState, useEffect } from "react";
+import { StyleSheet, Text, View } from "react-native";
+import React from "react";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { Link } from "expo-router";
+import { Carousel } from "@/src/components/carousel/Carousel";
 
-export default function RecordSymptoms() {
+export default function Home() {
     const insets = useSafeAreaInsets();
-
     return (
         <View
             style={{
@@ -18,9 +17,14 @@ export default function RecordSymptoms() {
                 paddingRight: insets.right,
             }}
         >
-            <Text>record symptioms Screen</Text>
-            <Link href={"/recordSymptoms/record-weight"}>record weight</Link>
-            <Link href={"/recordSymptoms/record-temperature"}>record temp</Link>
+            <Text style={{ fontSize: 20 }}>Home Screen</Text>
+            <View style={{ flexDirection: "row", flex: 1 }}>
+                {/* <StepWidget /> */}
+                <Text>steps</Text>
+                {/* <PeriodWidget /> */}
+                <Text>period</Text>
+            </View>
+            <Carousel />
         </View>
     );
 }

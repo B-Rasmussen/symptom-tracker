@@ -1,6 +1,6 @@
 import { View } from "react-native";
 import React from "react";
-import { InputWeightTemp } from "@/components/InputWeightTemp";
+import { InputWeightTemp } from "@/src/components/InputWeightTemp";
 
 export default function RecordTemperature() {
     return (

@@ -1,6 +1,7 @@
 import { Text, TextInput, View, Button, Alert } from "react-native";
 import React, { useState, useEffect } from "react";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useRouter } from "expo-router";
 
 type inputWeightTempProps = {
@@ -32,9 +33,17 @@ export function InputWeightTemp({ inputType }: inputWeightTempProps) {
 
     const recordUserInput = async () => {
         try {
-            Alert.alert(
-                `value saved as: ${userInput} date: ${date} time: ${time} for measurement ${inputType}`
-            );
+            // const userInputToBeRecorded = {
+            //     userInput: { userInput },
+            //     measurementType: { measurementType },
+            //     data: { date },
+            //     time: { time },
+            // };
+            // await AsyncStorage.multiSet()
+            
+            // Alert.alert(
+            //     `value saved as: ${userInput} date: ${date} time: ${time} for measurement ${inputType} measurem type ${measurementType}`
+            // );
         } catch (error) {
             console.error("error: ", error);
         }
