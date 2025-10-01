@@ -1,10 +1,18 @@
 import { StyleSheet, Text, View } from "react-native";
-import React from "react";
+import React, { use } from "react";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Carousel } from "@/src/components/carousel/Carousel";
+import { useSelector, useDispatch } from "react-redux";
 
 export default function Home() {
     const insets = useSafeAreaInsets();
+    const trackPeriod = useSelector((state: any) => state.trackPeriod);
+
+    console.log(
+        "periodTracking from redux store: ",
+        trackPeriod.optInPeriodTracking
+    );
+
     return (
         <View
             style={{
@@ -22,7 +30,7 @@ export default function Home() {
                 {/* <StepWidget /> */}
                 <Text>steps</Text>
                 {/* <PeriodWidget /> */}
-                <Text>period</Text>
+                {trackPeriod.optInPeriodTracking && <Text>period</Text>}
             </View>
             <Carousel />
         </View>
