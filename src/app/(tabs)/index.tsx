@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 export default function Home() {
     const insets = useSafeAreaInsets();
-    const trackPeriod = useSelector((state: any) => state.trackPeriod);
+    const userPreferences = useSelector((state: any) => state.userPreferences);
 
     return (
         <View
@@ -25,7 +25,7 @@ export default function Home() {
                 {/* <StepWidget /> */}
                 <Text>steps</Text>
                 {/* <PeriodWidget /> */}
-                {trackPeriod.optInPeriodTracking && <Text>period</Text>}
+                {userPreferences.optInPeriodTracking && <Text>period</Text>}
             </View>
             <Carousel />
         </View>

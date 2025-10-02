@@ -2,17 +2,19 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React, { useState } from "react";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useSelector, useDispatch } from "react-redux";
-import { toggleOptInPeriodTracking } from "../../redux/reducers/trackPeriod";
+import {
+    toggleFarenheit,
+    togglePounds,
+    toggleOptInPeriodTracking,
+} from "../../redux/reducers/userPreferences";
 
 export default function Settings() {
     const insets = useSafeAreaInsets();
-    const [useFarenheit, setUseFarenheit] = useState(true);
-    const [usePounds, setUsePounds] = useState(true);
     const [theme, setTheme] = useState("string");
 
-    const trackPeriod = useSelector((state: any) => state.trackPeriod);
+    const userPreferences = useSelector((state: any) => state.userPreferences);
     const dispatch = useDispatch();
-    console.log("trackPeriod: ", trackPeriod);
+    console.log("trackPeriod: ", userPreferences);
 
     return (
         <View
@@ -27,12 +29,36 @@ export default function Settings() {
             }}
         >
             <Text>App Settings</Text>
+            <TouchableOpacity onPress={() => dispatch(toggleFarenheit())}>
+                <Text>
+                    Temperature system:{" "}
+                    {userPreferences.useFarenheit == true ? (
+                        <Text>Farenheit</Text>
+                    ) : (
+                        <Text>Celsius</Text>
+                    )}
+                </Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => dispatch(togglePounds())}>
+                <Text>
+                    Weight system:{" "}
+                    {userPreferences.usePounds == true ? (
+                        <Text>Imperial</Text>
+                    ) : (
+                        <Text>Metric</Text>
+                    )}
+                </Text>
+            </TouchableOpacity>
             <TouchableOpacity
                 onPress={() => dispatch(toggleOptInPeriodTracking())}
             >
                 <Text>
-                    Track Period?{" "}
-                    {trackPeriod.optInPeriodTracking && <Text>✅</Text>}
+                    Track Period:{" "}
+                    {userPreferences.optInPeriodTracking == true ? (
+                        <Text>Opt In</Text>
+                    ) : (
+                        <Text>Opt Out</Text>
+                    )}
                 </Text>
             </TouchableOpacity>
         </View>
