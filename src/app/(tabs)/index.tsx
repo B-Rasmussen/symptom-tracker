@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from "react-native";
-import React, { use } from "react";
+import React from "react";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Carousel } from "@/src/components/carousel/Carousel";
 import { useSelector, useDispatch } from "react-redux";
@@ -7,11 +7,6 @@ import { useSelector, useDispatch } from "react-redux";
 export default function Home() {
     const insets = useSafeAreaInsets();
     const trackPeriod = useSelector((state: any) => state.trackPeriod);
-
-    console.log(
-        "periodTracking from redux store: ",
-        trackPeriod.optInPeriodTracking
-    );
 
     return (
         <View

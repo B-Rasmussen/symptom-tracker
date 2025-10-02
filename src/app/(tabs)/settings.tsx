@@ -1,13 +1,18 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React, { useState } from "react";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { useSelector, useDispatch } from "react-redux";
+import { toggleOptInPeriodTracking } from "../../redux/reducers/trackPeriod";
 
 export default function Settings() {
     const insets = useSafeAreaInsets();
-    const [trackPeriod, setTrackPeriod] = useState(false);
     const [useFarenheit, setUseFarenheit] = useState(true);
     const [usePounds, setUsePounds] = useState(true);
     const [theme, setTheme] = useState("string");
+
+    const trackPeriod = useSelector((state: any) => state.trackPeriod);
+    const dispatch = useDispatch();
+    console.log("trackPeriod: ", trackPeriod);
 
     return (
         <View
@@ -22,6 +27,14 @@ export default function Settings() {
             }}
         >
             <Text>App Settings</Text>
+            <TouchableOpacity
+                onPress={() => dispatch(toggleOptInPeriodTracking())}
+            >
+                <Text>
+                    Track Period?{" "}
+                    {trackPeriod.optInPeriodTracking && <Text>✅</Text>}
+                </Text>
+            </TouchableOpacity>
         </View>
     );
 }
