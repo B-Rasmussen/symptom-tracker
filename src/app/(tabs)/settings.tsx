@@ -14,13 +14,13 @@ export default function Settings() {
 
     const userPreferences = useSelector((state: any) => state.userPreferences);
     const dispatch = useDispatch();
-    console.log("trackPeriod: ", userPreferences);
 
     return (
         <View
             style={{
                 flex: 1,
-                justifyContent: "space-between",
+                // justifyContent: "space-between",
+                gap: 20,
                 alignItems: "center",
                 paddingTop: insets.top,
                 paddingBottom: insets.bottom,

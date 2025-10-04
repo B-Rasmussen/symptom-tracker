@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useRouter } from "expo-router";
+import { useSelector, useDispatch } from "react-redux";
 
 type inputWeightTempProps = {
     inputType: string;
@@ -11,6 +12,7 @@ type inputWeightTempProps = {
 export function InputWeightTemp({ inputType }: inputWeightTempProps) {
     const [userInput, setUserInput] = useState("");
     const [currentTime, setCurrentTime] = useState(new Date());
+    const userPreferences = useSelector((state: any) => state.userPreferences);
     const insets = useSafeAreaInsets();
     const router = useRouter();
 
@@ -31,19 +33,29 @@ export function InputWeightTemp({ inputType }: inputWeightTempProps) {
         return () => clearInterval(intervalId);
     }, []);
 
+    const measurementType =
+        inputType === "Weight"
+            ? userPreferences.usePounds
+                ? "lbs"
+                : "kg"
+            : userPreferences.useFarenheit
+            ? "°F"
+            : "°C";
+
     const recordUserInput = async () => {
         try {
-            // const userInputToBeRecorded = {
-            //     userInput: { userInput },
-            //     measurementType: { measurementType },
-            //     data: { date },
-            //     time: { time },
-            // };
+            const userInputToBeRecorded = {
+                userInput: { userInput },
+                measurementType: { measurementType },
+                data: { date },
+                time: { time },
+            };
             // await AsyncStorage.multiSet()
-            
-            // Alert.alert(
-            //     `value saved as: ${userInput} date: ${date} time: ${time} for measurement ${inputType} measurem type ${measurementType}`
-            // );
+
+            Alert.alert(
+                "Success!",
+                `value saved as: ${userInput}\ndate: ${date}\ntime: ${time}\nfor measurement ${inputType}\nmeasurement type ${measurementType}`,
+            );
         } catch (error) {
             console.error("error: ", error);
         }
@@ -54,7 +66,7 @@ export function InputWeightTemp({ inputType }: inputWeightTempProps) {
         <View
             style={{
                 flex: 1,
-                justifyContent: "space-between",
+                // justifyContent: "space-between",
                 alignItems: "center",
                 paddingTop: insets.top,
                 paddingBottom: insets.bottom,
@@ -62,7 +74,7 @@ export function InputWeightTemp({ inputType }: inputWeightTempProps) {
                 paddingRight: insets.right,
             }}
         >
-            <Text>record symptioms Screen</Text>
+            <Text>{inputType} Screen</Text>
             <View style={{ flexDirection: "row" }}>
                 <Text>{inputType} Input:</Text>
                 <TextInput
@@ -79,10 +91,6 @@ export function InputWeightTemp({ inputType }: inputWeightTempProps) {
                         paddingEnd: 4,
                     }}
                 />
-            </View>
-            <View>
-                <Text>Current Date: {date}</Text>
-                <Text>Current Time: {time}</Text>
             </View>
             <Button title="submit record" onPress={recordUserInput} />
         </View>

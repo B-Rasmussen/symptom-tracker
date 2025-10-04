@@ -7,7 +7,11 @@ type carouselDataProps = {
 };
 
 export const carouselData: carouselDataProps[] = [
-    { id: 0, carouselTitle: "Weight", linkTo: "/recordSymptoms/record-weight" as RelativePathString },
+    {
+        id: 0,
+        carouselTitle: "Weight",
+        linkTo: "/recordSymptoms/record-weight" as RelativePathString,
+    },
     {
         id: 1,
         carouselTitle: "Temperature",
