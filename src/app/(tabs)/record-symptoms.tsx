@@ -19,8 +19,8 @@ export default function RecordSymptoms() {
             }}
         >
             <Text>record symptioms Screen</Text>
-            <Link href={"/recordSymptoms/record-weight"}>Log Weight</Link>
-            <Link href={"/recordSymptoms/record-temperature"}>
+            <Link href={"/logEntryScreens/record-weight"}>Log Weight</Link>
+            <Link href={"/logEntryScreens/record-temperature"}>
                 Log Temperature
             </Link>
         </View>

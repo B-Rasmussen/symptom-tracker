@@ -1,11 +1,8 @@
 import {
     TouchableOpacity,
     Text,
-    StyleProp,
-    ViewStyle,
     View,
     Animated,
-    FlatList,
     Dimensions,
 } from "react-native";
 import React, { useEffect, useRef } from "react";
@@ -14,11 +11,7 @@ import { Link } from "expo-router";
 
 const { width: windowWidth } = Dimensions.get("window");
 
-interface carouselProps {
-    data: (typeof carouselData)[];
-}
-
-export const Carousel = ({}: carouselProps) => {
+export const Carousel = () => {
     const [currentIndex, setCurrentIndex] = React.useState(0);
     const flatlistRef = useRef<Animated.FlatList<any>>(null);
     const scrollX = useRef(new Animated.Value(0)).current;

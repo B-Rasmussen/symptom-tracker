@@ -3,11 +3,11 @@ import React from "react";
 import { useLocalSearchParams } from "expo-router";
 
 export default function SymptomsThisDay() {
-    const { id } = useLocalSearchParams()
+    const { date } = useLocalSearchParams()
 
     return (
         <View style={styles.container}>
-            <Text>Symptoms This Day with { id }</Text>
+            <Text>Symptoms recorded on { date }</Text>
         </View>
     );
 }

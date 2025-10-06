@@ -1,0 +1,22 @@
+[
+    {
+        "date": "2024-03-15T14:30:00Z",
+        "input": "120",
+        "measurementType": "lbs"
+    },
+    {
+        "date": "2025-10-01T00:30:00Z",
+        "input": "120",
+        "measurementType": "lbs"
+    },
+    {
+        "date": "2025-10-01T00:30:00Z",
+        "input": "50",
+        "measurementType": "lbs"
+    },
+    {
+        "date": "2025-10-01T00:30:00Z",
+        "input": "290",
+        "measurementType": "lbs"
+    }
+]

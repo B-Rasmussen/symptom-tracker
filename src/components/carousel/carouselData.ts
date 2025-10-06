@@ -10,11 +10,16 @@ export const carouselData: carouselDataProps[] = [
     {
         id: 0,
         carouselTitle: "Weight",
-        linkTo: "/recordSymptoms/record-weight" as RelativePathString,
+        linkTo: "/logEntryScreens/record-weight" as RelativePathString,
     },
     {
         id: 1,
         carouselTitle: "Temperature",
-        linkTo: "/recordSymptoms/record-temperature" as RelativePathString,
+        linkTo: "/logEntryScreens/record-temperature" as RelativePathString,
+    },
+    {
+        id: 2,
+        carouselTitle: "Period",
+        linkTo: "/logEntryScreens/record-period" as RelativePathString,
     },
 ];

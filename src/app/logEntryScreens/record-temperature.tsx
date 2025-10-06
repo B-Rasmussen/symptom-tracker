@@ -11,6 +11,7 @@ export default function RecordTemperature() {
                 alignItems: "center",
             }}
         >
+            
             <InputWeightTemp inputType="Temperature" />
         </View>
     );

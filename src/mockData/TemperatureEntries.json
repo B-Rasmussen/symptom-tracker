@@ -1,0 +1,22 @@
+[
+    {
+        "date": "2024-03-15T14:30:00Z",
+        "input": "98.6",
+        "measurementType": "Farenheit"
+    },
+    {
+        "date": "2024-10-31T14:30:00Z",
+        "input": "97.3",
+        "measurementType": "Farenheit"
+    },
+    {
+        "date": "2024-10-31T14:30:00Z",
+        "input": "103.3",
+        "measurementType": "Farenheit"
+    },
+    {
+        "date": "2024-10-31T14:30:00Z",
+        "input": "95.8",
+        "measurementType": "Farenheit"
+    }
+]

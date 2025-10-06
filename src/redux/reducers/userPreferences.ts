@@ -1,21 +1,41 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import type { RootState } from "../store";
 
 interface userPreferences {
-    // startDate: string | null;
-    // endDate: string | null;
     optInPeriodTracking: boolean;
     useFarenheit: boolean;
     usePounds: boolean;
+    userProvidedPeriodLength: number;
+    averagePeriodLength: number;
+    userProvidedCycleLength: number;
+    averagePredictedCycleLength: number;
 }
 
 const initialState: userPreferences = {
-    // startDate: null,
-    // endDate: null,
-    optInPeriodTracking: false,
+    optInPeriodTracking: true,
     useFarenheit: true,
     usePounds: true,
+    userProvidedPeriodLength: 5,
+    averagePeriodLength: 5,
+    userProvidedCycleLength: 28,
+    averagePredictedCycleLength: 28,
 };
+
+const wipePeriodData = async () => {
+    const data = await AsyncStorage.getAllKeys();
+    // const results = await AsyncStorage.multiGet(data);
+    // const keysToDelete = results
+    //     .filter(([, value]) => {
+    //         if (value) {
+    //             const parsed = JSON.parse(value);
+    //             return parsed.measurementType === "Period";
+    //         }
+    //         return false;
+    //     })
+    //     .map(([key]) => key);
+    await AsyncStorage.multiRemove(data);
+}
 
 export const userPreferencesSlice = createSlice({
     name: "userPreferences",
@@ -27,27 +47,15 @@ export const userPreferencesSlice = createSlice({
         togglePounds: (state) => {
             state.usePounds = !state.usePounds;
         },
-        // setStartDate: (state, action: PayloadAction<string>) => {
-        //     state.startDate = action.payload;
-        // },
-        // setEndDate: (state, action: PayloadAction<string>) => {
-        //     state.endDate = action.payload;
-        // },
         toggleOptInPeriodTracking: (state) => {
             state.optInPeriodTracking = !state.optInPeriodTracking;
+            wipePeriodData();
         },
-        // resetTrackPeriod: () => initialState,
     },
 });
 
-export const {
-    toggleFarenheit,
-    togglePounds,
-    // setStartDate,
-    // setEndDate,
-    toggleOptInPeriodTracking,
-    // resetTrackPeriod,
-} = userPreferencesSlice.actions;
+export const { toggleFarenheit, togglePounds, toggleOptInPeriodTracking } =
+    userPreferencesSlice.actions;
 
 export const selectTrackPeriod = (state: RootState) => state.userPreferences;
 

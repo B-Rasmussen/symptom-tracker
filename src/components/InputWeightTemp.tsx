@@ -3,34 +3,37 @@ import React, { useState, useEffect } from "react";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useRouter } from "expo-router";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 type inputWeightTempProps = {
     inputType: string;
 };
 
 export function InputWeightTemp({ inputType }: inputWeightTempProps) {
-    const [userInput, setUserInput] = useState("");
-    const [currentTime, setCurrentTime] = useState(new Date());
+    const [userInput, setUserInput] = useState<string>("");
+    const [date, setDate] = useState<string>("");
     const userPreferences = useSelector((state: any) => state.userPreferences);
     const insets = useSafeAreaInsets();
     const router = useRouter();
+    const [currentTime, setCurrentTime] = useState(new Date());
 
-    const date = currentTime.toLocaleDateString([], {
+    const dateOnly = currentTime.toLocaleDateString([], {
         month: "short",
         day: "numeric",
         year: "numeric",
     });
-    const time = currentTime.toLocaleTimeString([], {
+    const timeOnly = currentTime.toLocaleTimeString([], {
         hour: "2-digit",
         minute: "2-digit",
     });
 
     useEffect(() => {
-        const intervalId = setInterval(() => {
-            setCurrentTime(new Date());
+        const secondTimeOut = setInterval(() => {
+            var date = new Date();
+            var trimmedDate = date.toISOString().replace(/\.\d+Z/, "Z");
+            setDate(trimmedDate);
         }, 1000);
-        return () => clearInterval(intervalId);
+        return () => clearInterval(secondTimeOut);
     }, []);
 
     const measurementType =
@@ -39,22 +42,28 @@ export function InputWeightTemp({ inputType }: inputWeightTempProps) {
                 ? "lbs"
                 : "kg"
             : userPreferences.useFarenheit
-            ? "°F"
-            : "°C";
+            ? "Farenheit"
+            : "Celsius";
 
     const recordUserInput = async () => {
         try {
+            const input = parseFloat(userInput);
             const userInputToBeRecorded = {
-                userInput: { userInput },
-                measurementType: { measurementType },
-                data: { date },
-                time: { time },
+                input,
+                measurementType,
+                date,
             };
-            // await AsyncStorage.multiSet()
+
+            JSON.stringify(userInputToBeRecorded);
+            console.log(JSON.stringify(userInputToBeRecorded));
+            await AsyncStorage.setItem(
+                `${date}`,
+                JSON.stringify(userInputToBeRecorded)
+            );
 
             Alert.alert(
                 "Success!",
-                `value saved as: ${userInput}\ndate: ${date}\ntime: ${time}\nfor measurement ${inputType}\nmeasurement type ${measurementType}`,
+                `value saved as: ${input}\ndate: ${date}\nfor measurement ${inputType}\nmeasurement type ${measurementType}`
             );
         } catch (error) {
             console.error("error: ", error);
