@@ -30,7 +30,11 @@ export function InputWeightTemp({ inputType }: inputWeightTempProps) {
     useEffect(() => {
         const secondTimeOut = setInterval(() => {
             var date = new Date();
-            var trimmedDate = date.toISOString().replace(/\.\d+Z/, "Z");
+            // var trimmedDate = date.toISOString().replace(/\.\d+Z/, "Z");
+            var trimmedDate = date.toLocaleString('sv').replace(' ', 'T') + 'Z';
+            console.log('trimmedDate: ', trimmedDate);
+            // var convertedDate = new Intl.DateTimeFormat(undefined, {dateStyle: 'short',timeStyle: 'long'}).format(date)
+            // console.log("convertedDate: ", convertedDate);
             setDate(trimmedDate);
         }, 1000);
         return () => clearInterval(secondTimeOut);
@@ -53,9 +57,6 @@ export function InputWeightTemp({ inputType }: inputWeightTempProps) {
                 measurementType,
                 date,
             };
-
-            JSON.stringify(userInputToBeRecorded);
-            console.log(JSON.stringify(userInputToBeRecorded));
             await AsyncStorage.setItem(
                 `${date}`,
                 JSON.stringify(userInputToBeRecorded)

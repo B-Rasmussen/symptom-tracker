@@ -9,13 +9,13 @@ export default function PeriodWidget() {
         const getPeriodData = async () => {
             const data = await AsyncStorage.getAllKeys();
             const results = await AsyncStorage.multiGet(data);
-            console.log("results: ", results.filter(([, value]) => {
-                if (value) {
-                    const parsed = JSON.parse(value);
-                    return parsed.measurementType === "Period";
-                }
-                return false;
-            }));
+            // console.log("results: ", results.filter(([, value]) => {
+            //     if (value) {
+            //         const parsed = JSON.parse(value);
+            //         return parsed.measurementType === "Period";
+            //     }
+            //     return false;
+            // }));
             setPeriodData(Array.from(data));
         };
         getPeriodData();
@@ -24,7 +24,7 @@ export default function PeriodWidget() {
     return (
         <View>
             <Text>Period</Text>
-            <Text>{periodData ?? "Loading..."}</Text>
+            {/* <Text>{periodData ?? "Loading..."}</Text> */}
         </View>
     );
 }
